@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wedding | Riska & Ilham</title>
+
+<style>
+:root {
+  --cream: #f8f1e7;
+  --sage: #a4ad91;
+  --brown: #604c3f;
+  --gold: #c5a66a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: var(--cream);
+  color: hwb(0 4% 96%);
+}
+
+.page {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 45px 20px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 248, 235, 0.12);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.content {
+  width: 100%;
+  max-width: 650px;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: clamp(38px, 9vw, 65px);
+  font-weight: normal;
+  line-height: 1.2;
+  margin: 12px 0;
+}
+
+h2 {
+  font-size: clamp(27px, 6vw, 42px);
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+p {
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.gold {
+  color: #ead4a2;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,.8);
+  background: rgba(248,241,231,.94);
+  color: #514438;
+  text-decoration: none;
+  padding: 13px 23px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  margin: 8px 4px;
+  transition: .25s;
+}
+
+.btn:hover {
+  background: #e8d7b6;
+}
+
+.btn:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.btn-outline {
+  color: hwb(0 11% 85%);
+  background: transparent;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 25px 0;
+}
+
+.card {
+  background: rgba(255,255,255,.92);
+  color: var(--brown);
+  padding: 22px 12px;
+  border: 1px solid rgba(197,166,106,.8);
+  border-radius: 14px;
+}
+
+.card h3 {
+  font-weight: normal;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.card p {
+  font-size: 13px;
+}
+
+.clock {
+  font-size: 25px;
+  letter-spacing: 2px;
+  margin: 12px 0;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 22px 0;
+}
+
+.countdown div {
+  background: rgba(255,255,255,.92);
+  color: var(--brown);
+  padding: 13px 3px;
+  border-radius: 10px;
+}
+
+.countdown strong {
+  display: block;
+  font-size: 23px;
+  font-weight: normal;
+}
+
+.countdown span {
+  font-size: 10px;
+}
+
+.map-frame {
+  width: 100%;
+  height: 300px;
+  border: 0;
+  border-radius: 14px;
+  margin: -20px 0;
+  position: relative;
+  top: -30px;
+}
+
+.form-box {
+  background: rgba(255,255,255,.95);
+  color: var(--brown);
+  padding: 22px;
+  border-radius: 14px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.form-box label {
+  display: block;
+  margin: 12px 0 6px;
+  font-size: 13px;
+}
+
+.form-box input,
+.form-box textarea,
+.form-box select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d5c9b6;
+  border-radius: 8px;
+  font: inherit;
+  color: var(--brown);
+  background: white;
+}
+
+.form-box textarea {
+  resize: vertical;
+}
+
+.wish {
+  background: rgba(255,255,255,.94);
+  color: var(--brown);
+  padding: 13px;
+  margin-top: 10px;
+  border-radius: 9px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.wish-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.wish-message {
+  white-space: pre-wrap;
+}
+
+.wish-attendance {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+#wishInfo {
+  overflow-wrap: anywhere;
+}
+
+footer {
+  padding: 25px;
+  background: #453c32;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+}
+
+@media (max-width: 430px) {
+  .cards {
+    gap: 8px;
+  }
+
+  .card {
+    padding: 17px 8px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+#cover {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+#namaTamu {
+  pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HALAMAN 1: COVER -->
+<section class="page" id="cover">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/1.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div id="namaTamu" style="
+    position:absolute;
+    bottom:85px;
+    left:0;
+    width:100%;
+    text-align:center;
+    color:hwb(0 5% 95%);
+    font-family:Georgia,serif;
+    font-size:12px;
+    line-height:1.3;
+    z-index:9999;
+  ">
+    <div>Kepada Yth.</div>
+    <div id="guestName" style="font-size:14px;margin-top:4px;">
+      Tamu Undangan
+    </div>
+  </div>
+
+  <button
+    class="btn"
+    id="openInvitationButton"
+    type="button"
+    onclick="openInvitation()"
+    style="
+      position:absolute;
+      bottom:30px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:999;
+      margin:0;
+      border-radius:30px;
+      padding:13px 25px;
+      background:rgba(248,241,231,.95);
+      color:#514438;
+      border:1px solid white;
+      white-space:nowrap;
+      cursor:pointer;
+    ">
+    Buka Undangan
+  </button>
+</section>
+
+<!-- HALAMAN 2: PEMBUKA, JAM DAN HITUNG MUNDUR -->
+<section class="page" id="pembuka">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/2.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <p style="margin-top:25px">Waktu saat ini</p>
+    <div class="clock" id="clock">00:00:00</div>
+    <p id="today"></p>
+
+    <div class="countdown" id="countdown">
+      <div><strong>00</strong><span>Hari</span></div>
+      <div><strong>00</strong><span>Jam</span></div>
+      <div><strong>00</strong><span>Menit</span></div>
+      <div><strong>00</strong><span>Detik</span></div>
+    </div>
+
+    <a class="btn"
+       target="_blank"
+       rel="noopener"
+       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Riska+dan+Ilham&dates=20261108T040000Z/20261108T070000Z&details=Resepsi+Riska+dan+Ilham">
+      Simpan ke Kalender
+    </a>
+
+    <p style="margin-top:18px">
+      <a class="btn btn-outline" href="#video2">Lanjutkan</a>
+    </p>
+  </div>
+</section>
+
+<!-- HALAMAN 3: VIDEO -->
+<section class="page" id="video2">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/3.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+</section>
+
+<!-- HALAMAN 4: DETAIL ACARA -->
+<section class="page" id="acara">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/4.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <div class="cards">
+      <div class="card">
+        <h3>Akad Nikah</h3>
+        <p>Jum'at</p>
+        <p style="font-size:30px;margin:8px 0">06</p>
+        <p>November 2026</p>
+        <p style="margin-top:12px">Pukul 14.00 WIB</p>
+        <p>📍 Tempat: Mesjid Al-manar</p>
+      </div>
+
+      <div class="card">
+        <h3>Resepsi</h3>
+        <p>Minggu</p>
+        <p style="font-size:30px;margin:8px 0">08</p>
+        <p>November 2026</p>
+        <p style="margin-top:12px">Pukul 11.00 WIB</p>
+        <p>📍 Tempat: Jorong Ambacang Magek</p>
+      </div>
+    </div>
+
+    <a class="btn" href="#lokasi">Lihat Lokasi</a>
+  </div>
+</section>
+
+<!-- HALAMAN 5A: LOKASI -->
+<section class="page" id="lokasi">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/5.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <iframe
+      class="map-frame"
+      id="mapFrame"
+      title="Peta lokasi pernikahan"
+      src="https://maps.google.com/maps?q=-0.228835%2C100.413980&z=15&output=embed"
+      width="100%"
+      height="300"
+      style="border:0;border-radius:14px;"
+      loading="lazy"
+      allowfullscreen>
+    </iframe>
+
+    <a
+      class="btn"
+      id="mapsButton"
+      href="https://www.google.com/maps/dir/?api=1&destination=-0.228835%2C100.413980"
+      target="_blank"
+      rel="noopener">
+      Buka Petunjuk Arah
+    </a>
+  </div>
+</section>
+
+<!-- HALAMAN 5B: AMPLOP DIGITAL DANA -->
+<section class="page" id="amplop">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/6.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <div class="card">
+      <p style="margin-top:12px"></p>
+
+      <h3 style="margin-top:20px">DANA</h3>
+
+      <p id="danaNumber" style="font-size:20px;letter-spacing:1px">
+        083827090796
+      </p>
+
+      <p id="danaName">a.n Riska Ayu Lestari</p>
+
+      <button class="btn" type="button" onclick="copyDana()">
+        Salin Nomor DANA
+      </button>
+
+      <p id="copyMessage" aria-live="polite"></p>
+    </div>
+
+    <a class="btn btn-outline" href="#ucapan">Kirim Ucapan</a>
+  </div>
+</section>
+
+<!-- HALAMAN 6: UCAPAN DAN DOA -->
+<section class="page" id="ucapan">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/7.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <p class="eyebrow">Wishes & Prayers</p>
+
+    <div class="form-box">
+      <form id="wishForm">
+        <label for="guest">Nama</label>
+        <input
+          id="guest"
+          name="guest"
+          required
+          placeholder="Masukkan nama Anda">
+
+        <label for="attendance">Konfirmasi Kehadiran</label>
+        <select id="attendance" name="attendance">
+          <option value="Hadir">Hadir</option>
+          <option value="Tidak dapat hadir">Tidak dapat hadir</option>
+          <option value="Belum pasti">Belum pasti</option>
+        </select>
+
+        <label for="message">Ucapan dan Doa</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          required
+          placeholder="Tuliskan ucapan dan doa terbaik..."></textarea>
+
+        <button type="submit" class="btn" id="wishSubmitButton">
+          Kirim Ucapan
+        </button>
+      </form>
+
+      <p id="wishInfo" aria-live="polite" style="margin-top:8px"></p>
+    </div>
+
+    <div id="wishList"></div>
+  </div>
+</section>
+
+<footer>
+  The Wedding of Riska & Ilham · 8 November 2026
+</footer>
+
+<!-- PEMUTAR MUSIK -->
+<audio id="weddingMusic" preload="auto"></audio>
+
+<button
+  id="musicToggle"
+  type="button"
+  onclick="toggleMusic()">
+  ♫ Hidupkan Musik
+</button>
+
+<script>
+// ==========================================
+// 1. DATA UNDANGAN
+// ==========================================
+
+const NOMOR_DANA = "083827090796";
+const NAMA_DANA = "Riska Ayu Lestari";
+
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxJOPeHqLJNmq4fftfW3nXXn8E9eGCVtesnu17toE8lnMPLGBXHsR8JQ9XwEcwOkwxYxA/exec";
+
+const playlist = [
+  "assets/musik1.mp3",
+  "assets/musik2.mp3"
+];
+
+let currentMusic = 0;
+let wishRequestInProgress = false;
+let wishLoadInProgress = false;
+let wishCallbackId = 0;
+
+// ==========================================
+// 2. NAMA TAMU DARI LINK UNDANGAN
+// ==========================================
+
+function loadGuestName() {
+  const params = new URLSearchParams(window.location.search);
+  const namaTamu = params.get("to");
+
+  const guestName = document.getElementById("guestName");
+  const guestInput = document.getElementById("guest");
+
+  if (namaTamu && namaTamu.trim()) {
+    const nama = namaTamu.trim().replace(/\s+/g, " ");
+
+    if (guestName) {
+      guestName.textContent = nama;
+    }
+
+    if (guestInput) {
+      guestInput.value = nama;
+    }
+  }
+}
+
+loadGuestName();
+
+// ==========================================
+// 3. MUSIK DAN BUKA UNDANGAN
+// ==========================================
+
+const music = document.getElementById("weddingMusic");
+const musicButton = document.getElementById("musicToggle");
+
+function updateMusicButton() {
+  if (!musicButton || !music) return;
+
+  musicButton.textContent = music.paused
+    ? "♫ Hidupkan Musik"
+    : "♫ Matikan Musik";
+}
+
+function playMusic() {
+  if (!music) return;
+
+  if (!music.getAttribute("src")) {
+    music.src = playlist[currentMusic];
+  }
+
+  music.play()
+    .then(updateMusicButton)
+    .catch(function(error) {
+      console.log("Musik belum dapat diputar:", error);
+      updateMusicButton();
+    });
+}
+
+function toggleMusic() {
+  if (!music) return;
+
+  if (music.paused) {
+    playMusic();
+  } else {
+    music.pause();
+    updateMusicButton();
+  }
+}
+
+if (music) {
+  music.addEventListener("ended", function() {
+    currentMusic = (currentMusic + 1) % playlist.length;
+    music.src = playlist[currentMusic];
+
+    music.play()
+      .then(updateMusicButton)
+      .catch(function(error) {
+        console.log("Musik berikutnya gagal diputar:", error);
+        updateMusicButton();
+      });
+  });
+
+  music.addEventListener("play", updateMusicButton);
+  music.addEventListener("pause", updateMusicButton);
+}
+
+function openInvitation() {
+  // Pemutaran musik dimulai dari klik pengguna.
+  if (music) {
+    currentMusic = 0;
+    music.src = playlist[currentMusic];
+    playMusic();
+  }
+
+  // Tetap menuju halaman pembuka seperti desain awal.
+  const pembuka = document.getElementById("pembuka");
+
+  if (pembuka) {
+    pembuka.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+}
+
+// ==========================================
+// 4. JAM DIGITAL WIB
+// ==========================================
+
+function updateClock() {
+  const now = new Date();
+
+  const time = new Intl.DateTimeFormat("id-ID", {
+    timeZone: "Asia/Jakarta",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false
+  }).format(now);
+
+  const date = new Intl.DateTimeFormat("id-ID", {
+    timeZone: "Asia/Jakarta",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  }).format(now);
+
+  const clock = document.getElementById("clock");
+  const today = document.getElementById("today");
+
+  if (clock) clock.textContent = time + " WIB";
+  if (today) today.textContent = date;
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+// ==========================================
+// 5. HITUNG MUNDUR RESEPSI
+// ==========================================
+
+// Resepsi: 8 November 2026 pukul 11.00 WIB.
+// WIB adalah UTC+7, jadi waktu UTC = 04.00.
+const WEDDING_DATE =
+  new Date("2026-11-08T04:00:00Z").getTime();
+
+function updateCountdown() {
+  const countdown = document.getElementById("countdown");
+  if (!countdown) return;
+
+  const boxes = countdown.querySelectorAll("strong");
+  if (boxes.length < 4) return;
+
+  const difference = WEDDING_DATE - Date.now();
+
+  if (difference <= 0) {
+    boxes.forEach(function(box) {
+      box.textContent = "00";
+    });
+
+    countdown.setAttribute(
+      "aria-label",
+      "Hari resepsi telah tiba atau telah berlalu"
+    );
+    return;
+  }
+
+  const day = Math.floor(difference / 86400000);
+  const hour = Math.floor(
+    (difference % 86400000) / 3600000
+  );
+  const minute = Math.floor(
+    (difference % 3600000) / 60000
+  );
+  const second = Math.floor(
+    (difference % 60000) / 1000
+  );
+
+  boxes[0].textContent = String(day);
+  boxes[1].textContent = String(hour).padStart(2, "0");
+  boxes[2].textContent = String(minute).padStart(2, "0");
+  boxes[3].textContent = String(second).padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ==========================================
+// 6. PETA GOOGLE MAPS
+// ==========================================
+
+// Koordinat peta dan tombol mengikuti kode awal.
+// Tidak ada perubahan alamat atau posisi peta.
+
+// ==========================================
+// 7. AMPLOP DIGITAL DANA
+// ==========================================
+
+const danaNumber = document.getElementById("danaNumber");
+const danaName = document.getElementById("danaName");
+
+if (danaNumber) danaNumber.textContent = NOMOR_DANA;
+if (danaName) danaName.textContent = "a.n " + NAMA_DANA;
+
+async function copyDana() {
+  const message = document.getElementById("copyMessage");
+  if (!message) return;
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(NOMOR_DANA);
+    } else {
+      const input = document.createElement("textarea");
+      input.value = NOMOR_DANA;
+      input.style.position = "fixed";
+      input.style.opacity = "0";
+      document.body.appendChild(input);
+      input.select();
+
+      const copied = document.execCommand("copy");
+      input.remove();
+
+      if (!copied) throw new Error("Salin otomatis gagal");
+    }
+
+    message.textContent = "Nomor DANA berhasil disalin.";
+  } catch (error) {
+    message.textContent =
+      "Silakan salin nomor DANA secara manual: " + NOMOR_DANA;
+  }
+}
+
+// ==========================================
+// 8. MENAMPILKAN UCAPAN
+// ==========================================
+
+function showWish(item, prepend = false) {
+  const list = document.getElementById("wishList");
+  if (!list) return;
+
+  const card = document.createElement("div");
+  card.className = "wish";
+
+  const name = document.createElement("div");
+  name.className = "wish-name";
+  name.textContent = item.nama || "Tamu";
+
+  const message = document.createElement("p");
+  message.className = "wish-message";
+  message.textContent = item.ucapan || "";
+
+  const attendance = document.createElement("div");
+  attendance.className = "wish-attendance";
+  attendance.textContent =
+    "Kehadiran: " + (item.kehadiran || "-");
+
+  card.append(name, message, attendance);
+
+  if (prepend) {
+    list.prepend(card);
+  } else {
+    list.appendChild(card);
+  }
+}
+
+// ==========================================
+// 9. MEMUAT UCAPAN DARI GOOGLE APPS SCRIPT
+// ==========================================
+
+ function loadWishes() {
+  const callbackName =
+    "wishesCallback_" + Date.now();
+
+  const script = document.createElement("script");
+
+  window[callbackName] = function(data) {
+    const wishList = document.getElementById("wishList");
+
+    if (!wishList || !Array.isArray(data)) {
+      console.error("Data ucapan tidak sesuai.");
+      return;
+    }
+
+    wishList.innerHTML = "";
+
+    data.forEach(function(item) {
+      const wish = document.createElement("div");
+      wish.className = "wish";
+
+      const nama = document.createElement("strong");
+      nama.textContent = item.nama || "Tamu";
+
+      const kehadiran = document.createElement("p");
+      kehadiran.textContent =
+        "Kehadiran: " + (item.kehadiran || "-");
+
+      const ucapan = document.createElement("p");
+      ucapan.textContent = item.ucapan || "";
+
+      wish.appendChild(nama);
+      wish.appendChild(kehadiran);
+      wish.appendChild(ucapan);
+
+      wishList.appendChild(wish);
+    });
+
+    script.remove();
+    delete window[callbackName];
+  };
+
+  script.src =
+    SCRIPT_URL +
+    "?callback=" +
+    encodeURIComponent(callbackName) +
+    "&t=" +
+    Date.now();
+
+  script.onerror = function() {
+    console.error("Gagal mengambil data ucapan.");
+    script.remove();
+    delete window[callbackName];
+  };
+
+  document.body.appendChild(script);
+}
+
+// ==========================================
+// 10. FORM PENGIRIMAN UCAPAN
+// ==========================================
+
+const form = document.getElementById("wishForm");
+
+if (form) {
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    if (wishRequestInProgress) return;
+
+    const guestInput = document.getElementById("guest");
+    const attendanceInput =
+      document.getElementById("attendance");
+    const messageInput = document.getElementById("message");
+    const info = document.getElementById("wishInfo");
+    const button =
+      document.getElementById("wishSubmitButton");
+
+    const nama = guestInput.value.trim();
+    const kehadiran = attendanceInput.value;
+    const ucapan = messageInput.value.trim();
+
+    if (!nama || !ucapan) {
+      if (info) {
+        info.textContent = "Silakan isi nama dan ucapan terlebih dahulu.";
+      }
+      return;
+    }
+
+    wishRequestInProgress = true;
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Mengirim...";
+    }
+
+    if (info) {
+      info.textContent = "Sedang mengirim ucapan...";
+    }
+
+    const data = new URLSearchParams({
+      nama: nama,
+      kehadiran: kehadiran,
+      ucapan: ucapan
+    });
+
+    try {
+      // Mengirim data ke Google Apps Script.
+      // no-cors tidak memberikan konfirmasi penyimpanan.
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+      });
+
+      // Tampilkan ucapan pada halaman saat ini.
+      // Penyimpanan permanen tetap bergantung pada server.
+      showWish({
+        nama: nama,
+        kehadiran: kehadiran,
+        ucapan: ucapan
+      }, true);
+
+      form.reset();
+
+      if (info) {
+        info.textContent =
+          "Permintaan pengiriman selesai. " +
+          "Silakan periksa kembali nanti untuk memastikan ucapan tersimpan.";
+      }
+
+    } catch (error) {
+      console.error("Pengiriman ucapan gagal:", error);
+
+      if (info) {
+        info.textContent =
+          "Pengiriman mengalami kendala. Periksa koneksi internet dan coba lagi.";
+      }
+    } finally {
+      wishRequestInProgress = false;
+
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Kirim Ucapan";
+      }
+    }
+  });
+}
+
+// Muat daftar ucapan yang sebelumnya tersimpan.
+loadWishes();
+</script>
+
+</body>
+</html>
